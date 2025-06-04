@@ -1,46 +1,44 @@
 import React, { useState, useEffect } from "react";
-import Banner1 from "../assets/images/app-dwn.jpg"
-import Banner2 from "../assets/images/banner-01.png"
-import Banner3 from "../assets/images/banner-02.webp"
-import Banner4 from "../assets/images/app-dwn.jpg"
-
-const slides = [
-  {
-    id: 1,
-    image: Banner1,
-    heading: "Big Deals Await",
-    subheading: "Shop the latest trends with up to 50% off!",
-  },
-  {
-    id: 2,
-    image: Banner2,
-    heading: "Style Your Life",
-    subheading: "Explore the freshest styles and new arrivals.",
-  },
-  {
-    id: 3,
-    image: Banner3,
-    heading: "Tech Upgrades",
-    subheading: "Get the best gadgets at unbeatable prices!",
-  },
-  {
-    id: 4,
-    image: Banner4,
-    heading: "Home Essentials",
-    subheading: "Refresh your space with premium collections.",
-  },
-];
 
 const HeroSlider = () => {
+  const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    // Fetch banner data from API
+    const fetchBanners = async () => {
+      try {
+        const res = await fetch("https://backend.buildbazar.in/public/api/get-banners");
+        const json = await res.json();
+
+        if (json.response && json.data?.banner?.length) {
+          const bannerData = json.data.banner.map((item, index) => ({
+            id: index + 1,
+            image: `${json.data.driUrl}/${item.image}`,
+            heading: item.name || "Welcome!",
+            subheading: "Discover great deals every day.",
+          }));
+          setSlides(bannerData);
+        }
+      } catch (error) {
+        console.error("Failed to load banners:", error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000); // 5 seconds per slide
+    }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides]);
+
+  if (slides.length === 0) {
+    return <div className="h-screen w-full flex items-center justify-center text-gray-500">Loading banners...</div>;
+  }
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -80,6 +78,7 @@ const HeroSlider = () => {
           ></button>
         ))}
       </div>
+      
     </div>
   );
 };
