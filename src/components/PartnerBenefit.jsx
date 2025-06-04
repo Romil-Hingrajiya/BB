@@ -44,17 +44,22 @@ export default function PartnerBenefit() {
   };
 
   return (
-    <section className="relative bg-fixed bg-cover bg-center w-full py-10 px-4 md:px-10"
-    style={{
-      backgroundImage: `url(${WhyChoose})`
-    }}>
+    <section
+      className="relative bg-fixed bg-cover bg-center w-full pt-10 px-4 md:px-10"
+      style={{
+        backgroundImage: `url(${WhyChoose})`,
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 backdrop-blur-xs z-0"></div>
+
       <div className="relative z-10 max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 flex items-center border-l-4 border-orange-500 pl-3">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mt-8 flex items-center border-l-4 border-orange-500 pl-3">
           Why Partner With Us
         </h2>
-        <div className="flex flex-col lg:flex-row items-center gap-8">
+        <div className="flex flex-col lg:flex-row items-center gap-4">
           {/* Left Accordion Section */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-20 relative">
             {accordionData.slice(0, 3).map((item, index) => (
               <div
                 key={index}
@@ -62,13 +67,13 @@ export default function PartnerBenefit() {
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex justify-between items-center px-4 py-3 bg-orange-500 font-semibold text-left"
+                  className="relative w-full flex justify-between items-center px-4 py-3 bg-orange-500 font-semibold text-left"
                 >
                   {item.title}
                   {openIndex === index ? <ChevronUp /> : <ChevronDown />}
                 </button>
                 {openIndex === index && item.content && (
-                  <div className="px-4 py-3 text-sm bg-white text-gray-800">
+                  <div className="absolute left-0 w-full transition-all duration-300 z-10 px-4 py-3 text-sm shadow-2xl bg-white text-gray-800">
                     {item.content}
                   </div>
                 )}
@@ -78,11 +83,11 @@ export default function PartnerBenefit() {
 
           {/* Image Section */}
           <div className="flex-1 max-w-sm sm:max-w-md md:max-w-lg">
-            <img src={WhyPartner} alt="" />
+            <img src={WhyPartner} className="md:pt-20" alt="" />
           </div>
 
           {/* Right Accordion Section */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-20 relative">
             {accordionData.slice(3).map((item, index) => (
               <div
                 key={index + 3}
@@ -90,13 +95,13 @@ export default function PartnerBenefit() {
               >
                 <button
                   onClick={() => toggleAccordion(index + 3)}
-                  className="w-full flex justify-between items-center px-4 py-3 bg-gray-700 font-semibold text-left"
+                  className="relative w-full flex justify-between items-center px-4 py-3 bg-gray-700 font-semibold text-left"
                 >
                   {item.title}
                   {openIndex === index + 3 ? <ChevronUp /> : <ChevronDown />}
                 </button>
                 {openIndex === index + 3 && item.content && (
-                  <div className="px-4 py-3 text-sm bg-white text-gray-800">
+                  <div className="absolute left-0 w-full transition-all duration-300 z-10 shadow-2xl px-4 py-3 text-sm bg-white text-gray-800">
                     {item.content}
                   </div>
                 )}
