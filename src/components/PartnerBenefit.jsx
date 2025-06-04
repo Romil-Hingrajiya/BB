@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import WhyPartner from "../assets/images/why-partner-bg.png";
+import WhyChoose from "../assets/images/why-choose-bg.jpg";
 
 const accordionData = [
   {
@@ -43,8 +44,11 @@ export default function PartnerBenefit() {
   };
 
   return (
-    <section className="bg-white py-10 px-4 md:px-10">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-fixed bg-cover bg-center w-full py-10 px-4 md:px-10"
+    style={{
+      backgroundImage: `url(${WhyChoose})`
+    }}>
+      <div className="relative z-10 max-w-7xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 flex items-center border-l-4 border-orange-500 pl-3">
           Why Partner With Us
         </h2>

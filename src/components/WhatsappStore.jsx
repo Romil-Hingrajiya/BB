@@ -4,7 +4,7 @@ import WAStore from "../assets/images/wa-banner.png";
 function WhatsappStore() {
   return (
     <>
-      <div className="relative my-20 w-full">
+      <div className="relative mt-20 w-full">
         <img src={WAStore} alt="Whatsapp Banner" />
 
         {/* Button Positioned Over Image */}
