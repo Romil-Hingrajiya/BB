@@ -4,9 +4,11 @@ import { RiArrowRightDoubleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import LogoWhite from "../assets/images/logo-white.png";
 import FooterPayment from "../assets/images/footer-payment.png";
+import WhatsAppAndScroll from "./WhatsAppAndScroll";
 
 const Footer = () => {
   return (
+    <>
     <footer className="min-w-full bg-gray-800/95 backdrop-blur-2xl text-white pt-24">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
         {/* 1. Logo & Description */}
@@ -234,6 +236,8 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    <WhatsAppAndScroll />
+    </>
   );
 };
 

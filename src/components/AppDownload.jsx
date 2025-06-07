@@ -2,12 +2,13 @@ import AppDwn from '../assets/images/app-dwn.jpg';
 import AppQR from '../assets/images/dwn-qr.jpeg';
 import AppStoreBg from '../assets/images/app-store-icon.jpg';
 import PlayStoreBg from '../assets/images/play-store-icon.png';
+import MobBG from '../assets/images/mobile-design-bg.png';
 
 
 export default function AppDownload() {
   return (
     <section
-      className="w-full relative bg-fixed bg-cover bg-center py-16 px-6 md:px-12"
+      className="w-full relative bg-fixed bg-cover bg-center py-16 px-6 md:px-12 overflow-y-hidden"
       style={{ 
         backgroundImage: `url(${AppDwn})` 
         }}
@@ -15,9 +16,9 @@ export default function AppDownload() {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/50 z-0"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10">
         {/* Left Content */}
-        <div className="flex-1 text-white space-y-6">
+        <div className="relative flex-1 text-white space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold flex items-center border-l-4 border-orange-500 pl-3">
             Download Our Application Now
           </h2>
@@ -61,11 +62,11 @@ export default function AppDownload() {
         </div>
 
         {/* Right Image */}
-        <div className="flex-1">
+        <div className="flex-1 relative">
           <img
-            src="/mobile-app-mockup.png"
+            src={MobBG}
             alt="App Preview"
-            className="w-full max-w-xs mx-auto lg:mx-0"
+            className="w-full absolute -top-10"
           />
         </div>
       </div>

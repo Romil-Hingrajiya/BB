@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiArchive, FiUsers } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleNav = () => {
     setNavOpen(!navOpen);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("Token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("Token");
+    setIsLoggedIn(false);
+    window.location.href = "/";
   };
 
   return (
@@ -21,36 +33,56 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6">
           <Link to="/">
-            <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">Home</span>
+            <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">
+              Home
+            </span>
           </Link>
           <Link to="/product">
-          <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">Products</span>
+            <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">
+              Products
+            </span>
           </Link>
           <Link to="/about">
-          <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">About Us</span>            
+            <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">
+              About Us
+            </span>
           </Link>
           <Link to="/contact">
-          <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">Contact Us</span>
+            <span className="text-gray-700 hover:text-orange-600 font-bold uppercase">
+              Contact Us
+            </span>
           </Link>
         </nav>
 
         {/* Actions */}
         <div className="hidden justify-end sm:flex sm:space-x-4 lg:pr-0">
-          <a
-            href="/#"
-            className="rounded-md bg-orange-500 hover:bg-orange-600 px-6 py-3 flex justify-center items-center space-x-3"
-          >
-            <FiArchive className="text-white" />
-            <span className="text-white font-bold">Buy / Sell</span>
-          </a>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="rounded-md bg-red-500 hover:bg-red-600 px-6 py-3 flex justify-center items-center space-x-3"
+            >
+              <FiUsers className="text-white" />
+              <span className="text-white font-bold">Logout</span>
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/signup"
+                className="rounded-md bg-orange-500 hover:bg-orange-600 px-6 py-3 flex justify-center items-center space-x-3"
+              >
+                <FiArchive className="text-white" />
+                <span className="text-white font-bold">Buy / Sell</span>
+              </Link>
 
-          <a
-            href="/#"
-            className="rounded-md bg-orange-500 hover:bg-orange-600 px-6 py-3 flex justify-center items-center space-x-3"
-          >
-            <FiUsers className="text-white" />
-            <span className="text-white font-bold">Login</span>
-          </a>
+              <Link
+                to="/login"
+                className="rounded-md bg-orange-500 hover:bg-orange-600 px-6 py-3 flex justify-center items-center space-x-3"
+              >
+                <FiUsers className="text-white" />
+                <span className="text-white font-bold">Login</span>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}

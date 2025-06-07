@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { getBanners } from "../api/api"; // Adjust path if needed
 
 const HeroSlider = () => {
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    // Fetch banner data from API
     const fetchBanners = async () => {
       try {
-        const res = await fetch("https://backend.buildbazar.in/public/api/get-banners");
-        const json = await res.json();
+        const json = await getBanners();
 
         if (json.response && json.data?.banner?.length) {
           const bannerData = json.data.banner.map((item, index) => ({
@@ -65,8 +64,6 @@ const HeroSlider = () => {
           </div>
         </div>
       ))}
-
-      {/* Dots / Pagination */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
         {slides.map((_, i) => (
           <button
@@ -78,7 +75,6 @@ const HeroSlider = () => {
           ></button>
         ))}
       </div>
-      
     </div>
   );
 };
